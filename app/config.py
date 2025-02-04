@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
     LLM_TEMPERATURE: float = os.getenv("LLM_TEMPERATURE", 0.5)
     LLM_HISTORY_LENGTH: int = os.getenv("LLM_HISTORY_LENGTH", 10)
+    POSTGRES_USER: str | None
+    POSTGRES_PASSWORD: str | None
+    POSTGRES_DB: str | None
 
     class Config:
         env_file = ".env"
