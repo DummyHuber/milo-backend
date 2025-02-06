@@ -18,7 +18,7 @@ router = APIRouter()
     description="Retrieve chat history for the client based on their IP address."
 )
 async def get_chats(request: Request, llm_service: ChatService = Depends(get_chat_service)):
-    """Handles chat creation when no chat_id is provided."""
+    """Return the list of available chats."""
     chats = llm_service.get_chats(request.client.host)
     return chats
 
@@ -41,7 +41,7 @@ async def create_new_chat_with_message(request: Request, body: UserPromptBody, l
     description="Get a detailed chat information with the messages."
 )
 async def get_chat_details(chat_id: int, llm_service: ChatService = Depends(get_chat_service)):
-    """Handles messages for an existing chat."""
+    """Return selected chat with the message history."""
     chat = llm_service.get_chat_by_id(chat_id)
     if not chat:
         raise HTTPException(status_code=404, detail="Chat cannot be found")
@@ -58,6 +58,7 @@ async def send_message(
     body: UserPromptBody,
     llm_service: ChatService = Depends(get_chat_service)
 ):
+    """Handles messages for an existing chat."""
     response = llm_service.send_user_message(chat_id, body)
     return StreamingResponse(response, media_type="text/plain")
 

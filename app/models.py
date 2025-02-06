@@ -30,8 +30,8 @@ class Message(GenericBase):
 
     id = Column(Integer, primary_key=True, index=True)
     chat_id = Column(Integer, ForeignKey("chats.id", ondelete="CASCADE"))
-    question = Column(Text, nullable=False)  # User's message
-    response = Column(Text, nullable=True)  # AI's response
+    question = Column(Text, nullable=False)
+    response = Column(Text, nullable=True)
     created_at = Column(String, default=lambda: datetime.utcnow().isoformat())  # Store as string
 
     # Relationship with chat

@@ -1,8 +1,17 @@
 from fastapi import FastAPI
-from app.routes import router  # Importing routes
+from starlette.middleware.cors import CORSMiddleware
 
-# Initialize FastAPI app
-app = FastAPI(title="DeepMind API", description="AI service to answer Religion related question with the science aspect")
+from app.routes import router
+from app.config import settings
 
-# Include routes
+app = FastAPI(title="Milo API", description="AI service to answer Religion related question with the science aspect")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors.allow_origins,
+    allow_methods=settings.cors.allow_methods,
+    allow_headers=settings.cors.allow_headers,
+    allow_credentials=settings.cors.allow_credentials,
+)
+
 app.include_router(router)

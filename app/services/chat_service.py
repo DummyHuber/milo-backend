@@ -45,7 +45,7 @@ class ChatService:
         return True
 
     def create_chat(self, user_ip: str, input_text: str):
-        """Creates a new chat entry."""
+        """Creates a new chat."""
         chat = Chat(title=input_text, user_ip=user_ip)
         self.db.add(chat)
         self.db.commit()
