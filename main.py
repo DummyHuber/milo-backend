@@ -4,7 +4,11 @@ from starlette.middleware.cors import CORSMiddleware
 from app.routes import router
 from app.config import settings
 
-app = FastAPI(title="Milo API", description="AI service to answer Religion related question with the science aspect")
+app = FastAPI(
+    title="Milo API",
+    description="AI service to answer Religion related question with the science aspect",
+    debug=settings.DEBUG,
+)
 
 app.add_middleware(
     CORSMiddleware,
