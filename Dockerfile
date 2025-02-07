@@ -14,5 +14,5 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Expose the FastAPI default port
 EXPOSE 8000
 
-# Run Alembic migrations and start the FastAPI app
-CMD ["sh", "-c", "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"]
+# Start the FastAPI app with Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
