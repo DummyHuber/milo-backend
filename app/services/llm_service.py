@@ -3,7 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain.schema.runnable import RunnableSequence
 from app.config import settings
 from app.models import Message
-from app.promts import NEW_MESSAGE_PROMPT
+from app.prompts import NEW_MESSAGE_PROMPT
 
 
 class LLMService:
