@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "db")
     POSTGRES_PORT: int = int(os.getenv("POSTGRES_PORT", 5432))
     DATABASE_URL: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    DATABASE_POOL_RECYCLE: int = int(os.environ.get("DATABASE_POOL_RECYCLE", 1000))
+    DATABASE_POOL_TIMEOUT: int = int(os.environ.get("DATABASE_POOL_TIMEOUT", 5))
 
     cors: CORSConfigModel = CORSConfigModel()
 
