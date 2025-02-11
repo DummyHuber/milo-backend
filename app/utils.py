@@ -1,3 +1,6 @@
+import json
+import datetime
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.config import settings  # Ensure you have settings with DATABASE_URL
@@ -8,3 +11,10 @@ def create_database_engine():
 
     # Create a SessionLocal class
     return sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime.datetime):
+            return o.isoformat()
+        return super().default(o)

@@ -1,8 +1,8 @@
 """0001
 
-Revision ID: cc46df52c7b6
+Revision ID: 75d79df9fce9
 Revises: 
-Create Date: 2025-02-01 00:51:47.915125
+Create Date: 2025-02-11 12:42:06.506708
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'cc46df52c7b6'
+revision: str = '75d79df9fce9'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,7 +24,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('user_ip', sa.String(), nullable=False),
-    sa.Column('created_at', sa.String(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_chats_id'), 'chats', ['id'], unique=False)
@@ -33,7 +33,7 @@ def upgrade() -> None:
     sa.Column('chat_id', sa.Integer(), nullable=True),
     sa.Column('question', sa.Text(), nullable=False),
     sa.Column('response', sa.Text(), nullable=True),
-    sa.Column('created_at', sa.String(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['chat_id'], ['chats.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )

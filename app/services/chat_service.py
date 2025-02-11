@@ -5,6 +5,7 @@ from app.models import Message, Chat
 from app.schemas import UserPromptBody
 from app.services.llm_service import LLMService
 from app.config import settings
+from app.utils import DateTimeEncoder
 
 
 class ChatService:
@@ -99,7 +100,7 @@ class ChatService:
 
             #  Yield final message JSON for frontend
             yield "\n"
-            yield f"final||{json.dumps({'message': message.to_dict()})}"
+            yield f"final||{json.dumps({'message': message.to_dict()}, cls=DateTimeEncoder)}"
 
         except Exception as e:
             yield str(e)

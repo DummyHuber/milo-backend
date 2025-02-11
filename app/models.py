@@ -19,7 +19,7 @@ class Chat(GenericBase):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     user_ip = Column(String, nullable=False)
-    created_at = Column(String, default=lambda: datetime.utcnow().isoformat())  # Store as string
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationship with messages
     messages = relationship("Message", back_populates="chat", cascade="all, delete", lazy="select")
@@ -32,7 +32,7 @@ class Message(GenericBase):
     chat_id = Column(Integer, ForeignKey("chats.id", ondelete="CASCADE"))
     question = Column(Text, nullable=False)
     response = Column(Text, nullable=True)
-    created_at = Column(String, default=lambda: datetime.utcnow().isoformat())  # Store as string
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationship with chat
     chat = relationship("Chat", back_populates="messages", lazy="select")
